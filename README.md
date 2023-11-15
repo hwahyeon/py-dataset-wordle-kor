@@ -36,7 +36,7 @@ root/
 ```
 
 ## Output
-JSON 파일로 output/에 저장된다.
+JSON 파일로 `output/`에 저장된다.
 
 ## Dataset
 - [우리말샘](https://opendict.korean.go.kr/) 사전
