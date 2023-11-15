@@ -79,7 +79,26 @@ def decompose(syllable):
 def hangul_decompose(string):
     return "".join(decompose(ch) for ch in string)
 
-# JSON로 데이터 저장
-def save_to_json(data, file_path):
+
+# JSON파일로 저장 : 새 데이터 추가 (append가 True일 경우) / 덮어쓰기 (append가 False일 경우)
+def save_json(data, file_path, append=False):
+    existing_data = []
+
+    if append:
+        try:
+            # 기존 데이터 불러오기
+            with open(file_path, 'r', encoding='utf-8') as json_file:
+                existing_data = json.load(json_file)
+        except FileNotFoundError:
+            # 파일이 없으면 새로운 리스트 생성
+            pass
+
+    if append:
+        # 새 데이터 추가
+        existing_data.extend(list(data))
+    else:
+        existing_data = data
+
+    # 데이터를 JSON 파일로 저장
     with open(file_path, 'w', encoding='utf-8') as json_file:
-        json.dump(data, json_file, ensure_ascii=False, indent=4)
+        json.dump(existing_data, json_file, ensure_ascii=False, indent=4)
