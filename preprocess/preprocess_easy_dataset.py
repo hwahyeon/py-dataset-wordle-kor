@@ -1,4 +1,4 @@
-from preprocess.common_preprocessing import hangul_decompose, remove_numbers, save_to_json
+from preprocess.common_preprocessing import hangul_decompose, remove_numbers, save_json
 import pandas as pd
 import os
 
@@ -23,4 +23,4 @@ def process(directory_path, output_path):
             decomposed_data = read_and_process_file(file_path)
             all_decomposed_data.extend(decomposed_data)
 
-    save_to_json(all_decomposed_data, output_path)
+    save_json(all_decomposed_data, output_path)
