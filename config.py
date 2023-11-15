@@ -1,3 +1,6 @@
-DATASET1_PATH = "dataset/dataset1"
-DATASET2_PATH = "dataset/dataset2"
-DATASET3_PATH = "dataset/dataset3"
+DATASET1_PATH = 'dataset/dataset1'
+DATASET2_PATH = 'dataset/dataset2'
+DATASET3_PATH = 'dataset/dataset3'
+EASY_MODE_OUTPUT_PATH = 'output/easy_mode.json'
+IMDT_MODE_OUTPUT_PATH = 'output/imdt_mode.json'
+HARD_MODE_OUTPUT_PATH = 'output/hard_mode.json'
