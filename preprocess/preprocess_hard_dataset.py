@@ -20,7 +20,11 @@ def process_words(filtered_data):
     for word in result_set:
         decomposed_word = hangul_decompose(word)
         if len(decomposed_word) == 5:
-            wordle_list.append(decomposed_word)
+            decomposed_data = {
+                'key': word,
+                'value': decomposed_word
+            }
+            wordle_list.append(decomposed_data)
     return wordle_list
 
 def process_files(file_path, output_path):
