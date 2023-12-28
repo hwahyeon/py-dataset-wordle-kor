@@ -9,6 +9,23 @@ def read_and_process_file(file_path):
 def decompose_words(words):
     return [hangul_decompose(word) for word in words if len(hangul_decompose(word)) == 5]
 
+
+def decompose_words(words):
+    decomposed_list = []
+
+    for word in words:
+        decomposed_word = hangul_decompose(word)
+
+        if len(decomposed_word) == 5:
+            decomposed_data = {
+                'key': word,
+                'value': decomposed_word
+            }
+            decomposed_list.append(decomposed_data)
+
+    return decomposed_list
+
+
 def process_file(file_path, output_path):
     words = read_and_process_file(file_path)
     decomposed_words = decompose_words(words)
