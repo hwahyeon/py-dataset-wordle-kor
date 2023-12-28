@@ -8,9 +8,14 @@ def read_and_process_file(file_path):
     filtered_words = data[data['품사'] == '명']['단어'].tolist()
 
     for item in filtered_words:
-        processed_item = hangul_decompose(remove_numbers(item))
+        remove_number_item = remove_numbers(item)
+        processed_item = hangul_decompose(remove_number_item)
         if len(processed_item) == 5:
-            decomposed_list.append(processed_item)
+            decomposed_data = {
+                'key': remove_number_item,
+                'value': processed_item
+            }
+            decomposed_list.append(decomposed_data)
 
     return decomposed_list
 
