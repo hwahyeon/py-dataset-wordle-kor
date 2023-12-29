@@ -10,9 +10,12 @@ def filter_data(file_path):
     return data[condition_pos & condition_unit & condition_category]
 
 def process_words(filtered_data):
+    # 사전 생성 시에도 동일한 문자열 변형 로직 적용
+    modified_words = filtered_data.iloc[:, 0].str.replace('-', '')
+    word_to_meaning = dict(zip(modified_words, filtered_data['뜻풀이']))
+
     result_set = set()
-    first_column = filtered_data.iloc[:, 0].str.replace('-', '')
-    # 단어 길이 3개 이하만 추리기 (보수적으로 잡음)
+    first_column = modified_words  # 이미 변형된 단어 사용
     short_words = first_column[first_column.str.len() <= 3]
     result_set.update(short_words)
 
@@ -22,7 +25,8 @@ def process_words(filtered_data):
         if len(decomposed_word) == 5:
             decomposed_data = {
                 'key': word,
-                'value': decomposed_word
+                'value': decomposed_word,
+                'mean': word_to_meaning.get(word, '')  # '뜻풀이' 추가
             }
             wordle_list.append(decomposed_data)
     return wordle_list
