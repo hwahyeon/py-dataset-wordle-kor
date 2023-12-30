@@ -29,7 +29,8 @@ root/
 │   ├── common_preprocessing.py      # Common preprocessing functions  
 │   ├── preprocess_easy_dataset.py   # Script for preprocessing dataset1
 │   ├── preprocess_imdt_dataset.py   # Script for preprocessing dataset2
-│   └── preprocess_hard_dataset.py   # Script for preprocessing dataset3
+│   ├── preprocess_hard_dataset.py   # Script for preprocessing dataset3
+│   └── preprocess_all_dataset.py   # Script for preprocessing dataset3 (dictionary)
 │  
 ├── main.py  
 └── config.py  
