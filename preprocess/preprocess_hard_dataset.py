@@ -1,42 +1,48 @@
 from preprocess.common_preprocessing import hangul_decompose, save_json
 import pandas as pd
 import os
+from collections import defaultdict
 
-def filter_data(file_path):
+def extract_data(file_path):
     data = pd.read_excel(file_path)
+
     condition_pos = data['품사'].isin(['명사', '감·명', '관·명', '명·부', '의존 명사'])
     condition_unit = data['구성 단위'] == '단어'
     condition_category = data['범주'].isna()
-    return data[condition_pos & condition_unit & condition_category]
 
-def process_words(filtered_data):
-    # 사전 생성 시에도 동일한 문자열 변형 로직 적용
-    modified_words = filtered_data.iloc[:, 0].str.replace('-', '')
-    word_to_meaning = dict(zip(modified_words, filtered_data['뜻풀이']))
+    filtered_data = data[condition_pos & condition_unit & condition_category]
 
-    result_set = set()
-    first_column = modified_words  # 이미 변형된 단어 사용
-    short_words = first_column[first_column.str.len() <= 3]
-    result_set.update(short_words)
+    # 필요한 열 추출
+    result = filtered_data[['어휘', '뜻풀이']]
+    return result
 
-    wordle_list = []
-    for word in result_set:
-        decomposed_word = hangul_decompose(word)
+def process_words(data):
+    data['어휘'] = data['어휘'].str.replace('-', '')
+
+    # 각 어휘에 대한 모든 뜻풀이와 분해된 단어를 저장할 defaultdict 생성
+    word_info = defaultdict(lambda: {'meanings': [], 'decomposed': ''})
+
+    for index, row in data.iterrows():
+        decomposed_word = hangul_decompose(row['어휘'])
         if len(decomposed_word) == 5:
-            decomposed_data = {
-                'key': word,
-                'value': decomposed_word,
-                'mean': word_to_meaning.get(word, '')  # '뜻풀이' 추가
-            }
-            wordle_list.append(decomposed_data)
-    return wordle_list
+            word_info[row['어휘']]['meanings'].append(row['뜻풀이'])
+            word_info[row['어휘']]['decomposed'] = decomposed_word
+
+    # defaultdict에서 딕셔너리 리스트로 변환
+    word_list = [
+        {'key': word, 'value': info['decomposed'], 'mean': mean}
+        for word, info in word_info.items() for mean in info['meanings']
+    ]
+
+    return word_list
 
 def process_files(file_path, output_path):
-    filtered_data = filter_data(file_path)
+    filtered_data = extract_data(file_path)
     wordle_list = process_words(filtered_data)
     save_json(wordle_list, output_path, append=True)
 
 def process(directory_path, output_path):
+    print('hey')
     for filename in os.listdir(directory_path):
         if filename.endswith('.xls') or filename.endswith('.xlsx'):
             process_files(os.path.join(directory_path, filename), output_path)
