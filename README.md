@@ -1,8 +1,8 @@
-# 한글 Wordle을 위한 데이터 전처리
+# Data preprocessing for Korean Wordle
 
 ## Description
-본 프로젝트는 한글 Wordle에서 사용할 dataset을 추출하는 것을 목적으로 합니다.  
-한글 Wordle에서 필요한 데이터셋의 특징은 아래와 같습니다.
+The purpose of this project is to extract datasets to be used in Korean Wordle.  
+The characteristics of the dataset required for Korean Wordle are as follows.
 
 - 품사가 명사여야 한다.
 - 풀어쓰기로 반환한다.
