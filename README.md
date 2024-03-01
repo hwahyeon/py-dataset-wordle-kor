@@ -42,4 +42,4 @@ JSON 파일로 `output/`에 저장된다.
 ## Dataset
 - [우리말샘](https://opendict.korean.go.kr/) 사전
 - [국립국어원 한국어 기초사전](https://krdict.korean.go.kr/)
-- [국립국어연구원](https://www.korean.go.kr/front/etcData/etcDataView.do?mn_id=46&etc_seq=71) 한국어 학습용 어휘 목록
+- [국립국어연구원 한국어 학습용 어휘 목록](https://www.korean.go.kr/front/etcData/etcDataView.do?mn_id=46&etc_seq=71)
