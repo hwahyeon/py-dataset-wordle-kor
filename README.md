@@ -4,14 +4,14 @@
 The purpose of this project is to extract datasets to be used in Korean Wordle.  
 The characteristics of the dataset required for Korean Wordle are as follows.
 
-- 품사가 명사여야 한다.
-- 풀어쓰기로 반환한다.
-  - `하늘`은 `ㅎㅏㄴㅡㄹ`
-  - `너울`은 `ㄴㅓㅇㅜㄹ`
-- 풀어쓰기에서 겹자모는 두 칸을 사용한다.
-    - `꼬마`는 `ㄱㄱㅗㅁㅏ`
-    - `과거`는 `ㄱㅗㅏㄱㅓ`
-- 모든 데이터는 다섯 글자로 이루어져야 한다.
+- Only nouns are used in the datasets.
+- It is returned in a decomposed writing style.
+  - `하늘` → `ㅎㅏㄴㅡㄹ`
+  - `너울` → `ㄴㅓㅇㅜㄹ`
+- In the decomposed writing, double consonants use two spaces.
+    - `꼬마` → `ㄱㄱㅗㅁㅏ`
+    - `과거` → `ㄱㅗㅏㄱㅓ`
+- All output data must consist of five characters.
 
 ## Project Structure
 ```
@@ -37,7 +37,7 @@ root/
 ```
 
 ## Output
-JSON 파일로 `output/`에 저장된다.
+Each of the preprocessing python scripts generate a JSON file which is saved in `/output/`.
 
 ## Dataset
 - [우리말샘](https://opendict.korean.go.kr/) 사전
